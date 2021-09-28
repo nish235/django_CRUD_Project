@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block body %}
+<form class="form-inline"  action="create" method="POST">
+    {% csrf_token %}
+    <div class="container form-group">
+        <label for="firstname">Firstname</label>
+        <input type="text" name="firstname" class="form-control" style="width:30%;" required="required"/>
+        <label for="lastname">Lastname</label>
+        <input type="text" name="lastname" class="form-control" style="width:30%;"/>
+        <label for="email">Email</label>
+        <input type="text" name="email" class="form-control" style="width:30%;" required="required"/>
+        <label for="mobile">Mobile</label>
+        <input type="text" name="mobile" class="form-control" style="width:30%;" required="required"/>
+        <label for="city">City</label>
+        <input type="text" name="city" class="form-control" style="width:30%;"/><br>
+        <button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus"></span> ADD ENTRY</button>
+    </div>
+</form>
+<br />
+<div class="container-fluid">
+<table class="table table-bordered ">
+    <thead class="alert-warning">
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>City</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.firstname }}</td>
+            <td>{{ member.lastname }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.mobile }}</td>
+            <td>{{ member.city }}</td>
+            <td><center><a class="btn btn-sm btn-warning" href="edit/{{ member.id }}"><span class="glyphicon glyphicon-edit"></span> Edit</a></center></td>
+            <td><center><a class="btn btn-sm btn-danger" href="delete/{{ member.id }}"><span class="glyphicon glyphicon-trash"></span> Delete</a></center></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
